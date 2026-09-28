@@ -223,12 +223,14 @@ public class FileCardService {
     }
 
     // Save history log to text file
-    public void saveLog(Scanner scanner) {
+    public void saveLog(final Scanner scanner) {
         logger.println("File name:");
         String fileName = readLine(scanner);
 
         try {
-            Files.write(Path.of(fileName), logger.logHistory, StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
+            Files.write(Path.of(fileName), logger.logHistory,
+                    StandardOpenOption.CREATE,
+                    StandardOpenOption.TRUNCATE_EXISTING);
             logger.println("The log has been saved.\n");
         } catch (IOException e) {
             logger.println("Error saving log file: " + e.getMessage() + "\n");
