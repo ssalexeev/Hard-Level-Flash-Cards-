@@ -17,9 +17,11 @@ public enum Action {
         this.value = value;
     }
 
-    public static Action fromValue(String value){
-        for(Action action : values()){
-            if (action.value.equals(value)) return action;
+    public static Action fromValue(String value) {
+        for (Action action : values()) {
+            if (action.value.equals(value)) {
+                return action;
+            }
         }
         throw new IllegalArgumentException("Unknown Action: " + value);
     }

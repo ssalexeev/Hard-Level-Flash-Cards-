@@ -77,10 +77,7 @@
         <version>3.28.0</version>
         <configuration>
           <rulesets>
-            <ruleset>category/java/bestpractices.xml</ruleset>
-            <ruleset>category/java/codestyle.xml</ruleset>
-            <ruleset>category/java/errorprone.xml</ruleset>
-            <ruleset>category/java/performance.xml</ruleset>
+            <ruleset>config/pmd/ruleset.xml</ruleset>
           </rulesets>
         </configuration>
         <executions>
@@ -100,8 +97,8 @@
         <artifactId>spotbugs-maven-plugin</artifactId>
         <version>4.10.4.0</version>
         <configuration>
-          <includeFilterFile>spotbugs-security-include.xml</includeFilterFile>
-          <excludeFilterFile>spotbugs-security-exclude.xml</excludeFilterFile>
+          <includeFilterFile>config/spotbugs/spotbugs-security-include.xml</includeFilterFile>
+          <excludeFilterFile>config/spotbugs/spotbugs-security-exclude.xml</excludeFilterFile>
           <plugins>
             <plugin>
               <groupId>com.h3xstream.findsecbugs</groupId>
@@ -113,6 +110,4 @@
       </plugin>
     </plugins>
   </build>
-
-
 </project>

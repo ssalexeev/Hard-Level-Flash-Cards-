@@ -98,7 +98,9 @@ public class FileCardService {
             int count = 0;
 
             for (String line : lines) {
-                if (line.isBlank()) continue;
+                if (line.isBlank()) {
+                    continue;
+                }
                 String[] parts = line.split(",", 3);
                 if (parts.length == 3) {
                     cards.put(parts[0], new FlashCard(parts[0], parts[1], Integer.parseInt(parts[2])));
