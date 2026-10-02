@@ -1,5 +1,7 @@
 package org.example.flashcards;
 
+import org.example.flashcards.enums.Action;
+
 import java.util.Scanner;
 
 public class FlashCardsEngine {

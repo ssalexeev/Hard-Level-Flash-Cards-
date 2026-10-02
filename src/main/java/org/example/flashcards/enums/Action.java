@@ -1,4 +1,4 @@
-package org.example.flashcards;
+package org.example.flashcards.enums;
 
 public enum Action {
     ADD("add"),
@@ -8,8 +8,8 @@ public enum Action {
     ASK("ask"),
     EXIT("exit"),
     LOG("log"),
-    HARDEST_CARD("hardest card"),
-    RESET_STATS("reset stats");
+    HARDEST_CARD("hardest_card"),
+    RESET_STATS("reset_stats");
 
     private final String value;
 

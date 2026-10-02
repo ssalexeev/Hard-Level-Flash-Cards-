@@ -1,4 +1,4 @@
-package org.example.flashcards;
+package org.example.flashcards.entity;
 
 public class FlashCard {
     private String term;

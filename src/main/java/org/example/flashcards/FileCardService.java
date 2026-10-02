@@ -1,5 +1,7 @@
 package org.example.flashcards;
 
+import org.example.flashcards.entity.FlashCard;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -14,15 +16,21 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class FileCardService {
-    private final Map<String, FlashCard> cards = new LinkedHashMap<>();
-    private final Logger logger = new Logger();
+    private final Map<String, FlashCard> cards;
+    private final Logger logger;
+
+
+    public FileCardService() {
+        this.cards = new LinkedHashMap<>();
+        this.logger = new Logger();
+    }
 
     public Logger logger() {
         return this.logger;
     }
 
     public static class Logger {
-        protected final List<String> logHistory = new ArrayList<>();
+        public final List<String> logHistory = new ArrayList<>();
 
         public void println(String message) {
             System.out.println(message);
@@ -57,19 +65,19 @@ public class FileCardService {
         String card = readLine(scanner);
 
         if (cards.containsKey(card)) {
-            logger.println("The card \"" + card + "\" already exists.\n");
+            logger.println("The card \"" + card + "\" already exists.");
             return;
         }
 
         logger.println("The definition of the card:");
         String definition = readLine(scanner);
         if (getDefinitions().contains(definition)) {
-            logger.println("The definition \"" + definition + "\" already exists.\n");
+            logger.println("The definition \"" + definition + "\" already exists.");
         }
 
         FlashCard flashCard = new FlashCard(card, definition);
         cards.put(card, flashCard);
-        logger.println("The pair (\"" + card + "\":\"" + definition + "\") has been added\n");
+        logger.println("The pair (\"" + card + "\":\"" + definition + "\") has been added");
     }
 
     public void removeCard(Scanner scanner) {
@@ -78,18 +86,17 @@ public class FileCardService {
 
         if (cards.containsKey(term)) {
             cards.remove(term);
-            logger.println("The card has been removed.\n");
+            logger.println("The card has been removed.");
         } else {
-            logger.println("Can't remove \"" + term + "\": there is no such card.\n");
+            logger.println("Can't remove \"" + term + "\": there is no such card.");
         }
     }
 
-    // Programmatic loading (CLI -import) -> NO "File name:" prompt!
     public void loadCardsFromFile(String fileName) {
         Path filePath = Path.of(fileName);
 
         if (!Files.exists(filePath)) {
-            logger.println("File not found.\n");
+            logger.println("File not found.");
             return;
         }
 
@@ -107,9 +114,9 @@ public class FileCardService {
                     count++;
                 }
             }
-            logger.println(count + " cards have been loaded.\n");
+            logger.println(count + " cards have been loaded.");
         } catch (IOException | NumberFormatException e) {
-            logger.println("File not found.\n");
+            logger.println("File not found.");
         }
     }
 
@@ -146,8 +153,6 @@ public class FileCardService {
         String fileName = readLine(scanner);
         saveCardsToFile(fileName);
     }
-
-    // --- GAME ACTIONS ---
 
     public void ask(Scanner scanner) {
         logger.println("How many times to ask?");
@@ -193,7 +198,7 @@ public class FileCardService {
 
     public void resetErrors() {
         cards.values().forEach(c -> c.setCountOfErrors(0));
-        logger.println("Card statistics have been reset.\n");
+        logger.println("Card statistics have been reset.");
     }
 
     public void hardestCard() {
@@ -203,7 +208,7 @@ public class FileCardService {
                 .orElse(0);
 
         if (maxErrors == 0) {
-            logger.println("There are no cards with errors.\n");
+            logger.println("There are no cards with errors.");
             return;
         }
 
@@ -224,7 +229,6 @@ public class FileCardService {
                 cardOrCards, isOrAre, cardNames, maxErrors, themOrIt);
     }
 
-    // Save history log to text file
     public void saveLog(final Scanner scanner) {
         logger.println("File name:");
         String fileName = readLine(scanner);
@@ -233,7 +237,7 @@ public class FileCardService {
             Files.write(Path.of(fileName), logger.logHistory,
                     StandardOpenOption.CREATE,
                     StandardOpenOption.TRUNCATE_EXISTING);
-            logger.println("The log has been saved.\n");
+            logger.println("The log has been saved.");
         } catch (IOException e) {
             logger.println("Error saving log file: " + e.getMessage() + "\n");
         }
