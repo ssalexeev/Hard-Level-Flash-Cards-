@@ -1,4 +1,4 @@
-package org.example.flashcards;
+package org.example.flashcards.enums;
 
 public enum Action {
     ADD("add"),
@@ -8,8 +8,8 @@ public enum Action {
     ASK("ask"),
     EXIT("exit"),
     LOG("log"),
-    HARDEST_CARD("hardest card"),
-    RESET_STATS("reset stats");
+    HARDEST_CARD("hardest_card"),
+    RESET_STATS("reset_stats");
 
     private final String value;
 
@@ -17,9 +17,11 @@ public enum Action {
         this.value = value;
     }
 
-    public static Action fromValue(String value){
-        for(Action action : values()){
-            if (action.value.equals(value)) return action;
+    public static Action fromValue(String value) {
+        for (Action action : values()) {
+            if (action.value.equals(value)) {
+                return action;
+            }
         }
         throw new IllegalArgumentException("Unknown Action: " + value);
     }

@@ -1,5 +1,7 @@
 package org.example.flashcards;
 
+import org.example.flashcards.enums.Action;
+
 import java.util.Scanner;
 
 public class FlashCardsEngine {
@@ -44,13 +46,16 @@ public class FlashCardsEngine {
                 case ASK -> fileCardService.ask(scanner);
                 case EXIT -> {
                     fileCardService.logger().println("Bye bye!");
-                    if (exportFile != null) fileCardService.saveCardsToFile(exportFile);
+                    if (exportFile != null) {
+                        fileCardService.saveCardsToFile(exportFile);
+                    }
                     workFlag = false;
                     scanner.close();
                 }
                 case LOG -> fileCardService.saveLog(scanner);
                 case HARDEST_CARD -> fileCardService.hardestCard();
                 case RESET_STATS -> fileCardService.resetErrors();
+                default -> throw new RuntimeException("Unknown Exception");
             }
         }
     }
